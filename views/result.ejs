@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Personality Test</title>
+		<link rel="stylesheet" href="/app.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		
+		<header>
+			<h2>Personality Test</h2>
+			<nav>
+				<li><a href="#">Personality Types</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+			</nav>
+		</header>
+	
+		<section class="landing">
+			<div class="background" style="background: rgb(63,149,251);
+background: radial-gradient(circle, rgba(63,149,251,1) 69%, rgba(252,70,172,1) 100%);"></div>
+			<div class="landing-content">
+				<h1>
+					Your personality Type is <%= result %>
+				</h1>
+				<p>
+				<strong>Mind:</strong>
+				Introverted (I)–prefer solitary activities, think before speaking, get exhausted by social interaction.
+				Extraverted (E)–prefer group activities, think while speaking, get energized by social interaction.
+				</p>
+				<p><strong>Energy:</strong>
+				
+				Intuitive (N)–imaginative, rely on their intuition, absorbed in ideas, focus on what might happen.<br>
+				Sensing (S)–down-to-earth, rely on their senses, absorbed in practical matters, focus on what has happened.
+				</p>
+				<p><strong>Nature:</strong>
+				
+				Thinking (T)-tough, follow their minds, focus on objectivity and rationality.<br>
+				Feeling (F)–sensitive, follow their hearts, focus on harmony and cooperation.
+				</p>
+				<p><strong>Tactics:</strong>
+				
+				Judging (J)–decisive, prefer clear rules and guidelines, see deadlines as sacred, seek closure.
+				Perceiving (P)–very good at improvising, prefer keeping their options open, relaxed about their work, seek freedom.
+				</p>
+				<a href="https://www.16personalities.com/<%=result%>-personality" class="btn">Find out more</a>
+			</div>
+		</section>

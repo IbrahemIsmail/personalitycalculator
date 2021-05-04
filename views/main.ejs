@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Personality Test</title>
+		<link rel="stylesheet" href="/app.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+  		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet">
+	</head>
+
+	<body>
+
+		
+		<header>
+			<h2>Personality Test</h2>
+			<nav>
+				<li><a href="#">Personality Types</a></li>
+				<li><a href="#">About Us</a></li>
+				<li><a href="#">Contact</a></li>
+			</nav>
+		</header>
+	
+		<section class="landing">
+			<div class="background" style="background: rgb(63,149,251);
+background: radial-gradient(circle, rgba(63,149,251,1) 69%, rgba(252,70,172,1) 100%);"></div>
+			<div class="landing-content">
+				<h1>
+					Personality Test
+				</h1>
+				<h3>
+					Take the briggs myers personality test right here for free!
+				</h3>
+				<a href="https://www.16personalities.com/personality-types" class="btn">Personality Types</a>
+			</div>
+		</section>
+		
+		<section class="intro">
+			<h3 class="title">
+				Introduction
+			</h3>
+			<p>
+				There are no “right“ or “wrong” answers to the questions on this inventory. Your answers will help to show how you like to look at things and how you like to go about deciding things. Knowing your own preferences and learning about other people’s can help you understand whether your special strenghts are, what kind of work you might enjoy and be successful doing, and how people with different preferences can relate to each other and be valuable to society.Read each question carefully and select one of the two choices given, which applies to you, by circling to either “A” or “B”.
+			</p>
+			<hr>
+		</section>
+		
+		<section id="topQ" class="questionsSec">
+			<% for(let i=0; i<questions.length; i++){%>
+				<% if(questions[i].qNum==i+1){ %>
+				<h3 class="question1 title">
+					<%= questions[i].qNum %>- <%= questions[i].question %>
+				</h3>
+				<ul class="grid answers">
+					
+					<form id="Q<%= i+1%>" method="post" action="/">
+						<li>		
+  							<input onclick="send('Q<%= i+1 %>')" type="radio" value="A<%= i+1 %>" name="question<%= i+1 %>">
+  							<label for="question<%= i+1 %>"><%= questions[i].answers.a.answer %></label>
+						</li>
+						
+						<li>	
+							<input onclick="send('Q<%= i+1 %>')" type="radio" value="B<%= i+1 %>" name="question<%= i+1 %>">
+  							<label for="question<%= i+1 %>"><%= questions[i].answers.b.answer %></label>
+						</li>
+					</form> 
+				</ul>
+				<hr>
+				<% }else if(questions[i].qNum!=i+1){ %>
+						<% for(let j=0; j<questions.length; j++){%>
+							<% if(questions[j].qNum==i+1){ %>
+								<h3 id="topQ" class="question1 title">
+					<%= questions[j].qNum %>- <%= questions[j].question %>
+				</h3>
+				<ul class="grid answers">
+					
+					<form id="Q<%= j+1%>" method="post" action="/">
+						<li>		
+  							<input onclick="send('Q<%= j+1 %>')" type="radio" value="A<%= j+1 %>" name="question<%= j+1 %>">
+  							<label for="question<%= j+1 %>"><%= questions[j].answers.a.answer %></label>
+						</li>
+						
+						<li>	
+							<input onclick="send('Q<%= j+1 %>')" type="radio" value="B<%= j+1 %>" name="question<%= j+1 %>">
+  							<label for="question<%= j+1 %>"><%= questions[j].answers.b.answer %></label>
+						</li>
+					</form> 
+				</ul>
+				<hr>
+						<% } %>		
+					<% } %>
+				<% } %>
+			<% } %>
+			
+			<form id="resForm" method="post" action="/execute">
+				<button class="btn" onclick="send('resForm');">Submit</button>
+			</form>
+			<a class="btn" href="/result">Get your result</a>
+			<script>
+				send = (id)=>{
+					let form = document.getElementById(id);
+					form.submit();
+				}
+			</script>
+			
+			<script>
+				registerResults = ()=>{
+					
+					
+					
+					// let results = [];
+					// for(let i=0;i<50;i++){
+					// 	let name = "question"+(i+1);
+					// 	console.log(name);
+					// 	let ele = document.getElementsByName(name);
+					// 	for(let j=0; j<ele.length; j++){
+					// 		if(ele[j].checked){
+					// 			results[i] = ele[j].value;
+					// 		}
+					// 	}
+					// }
+					// console.log(results);
+					// return results;
+				}
+			</script>
+			
+		</section>
+		
+		
+		
+			<script>
+				ScrollFunc = ()=>{
+					let form = document.getElementById("resForm");
+					form.submit();
+					// document.querySelector("#resHere").classList.toggle("hidden");
+					// EPPZScrollTo.scrollVerticalToElementById('resHere', 40);
+				}
+				
+				var EPPZScrollTo =
+				{
+    				documentVerticalScrollPosition: function()
+    				{
+        				if (self.pageYOffset) return self.pageYOffset; // Firefox, Chrome, Opera, Safari.
+        				if (document.documentElement && document.documentElement.scrollTop) return document.documentElement.scrollTop;
+        				if (document.body.scrollTop) return document.body.scrollTop; // Internet Explorer 6, 7 and 8.
+        				return 0; // None of the above.
+    				},
+
+    				viewportHeight: function()
+    				{ return (document.compatMode === "CSS1Compat") ? document.documentElement.clientHeight : document.body.clientHeight; },
+
+    				documentHeight: function()
+    				{ return (document.height !== undefined) ? document.height : document.body.offsetHeight; },
+
+   					documentMaximumScrollPosition: function()
+    				{ return this.documentHeight() - this.viewportHeight(); },
+
+    				elementVerticalClientPositionById: function(id)
+    				{
+        				var element = document.getElementById(id);
+        				var rectangle = element.getBoundingClientRect();
+        				return rectangle.top;
+    				},
+    				scrollVerticalTickToPosition: function(currentPosition, targetPosition)
+   					{
+        				var filter = 0.1;
+        				var fps = 60;
+        				var difference = parseFloat(targetPosition) - parseFloat(currentPosition);
+        				// Snap, then stop if arrived.
+        				var arrived = (Math.abs(difference) <= 0.5);
+        				if (arrived)
+        				{
+           					// Apply target.
+            				scrollTo(0.0, targetPosition);
+            				return;
+        				}
+        				// Filtered position.
+        				currentPosition = (parseFloat(currentPosition) * (1.0 - filter)) + (parseFloat(targetPosition) * filter);
+        				// Apply target.
+        				scrollTo(0.0, Math.round(currentPosition));
+        				// Schedule next tick.
+        				setTimeout("EPPZScrollTo.scrollVerticalTickToPosition("+currentPosition+", "+targetPosition+")", (1000 / fps));
+    				},
+    				scrollVerticalToElementById: function(id, padding)
+    				{
+        				var element = document.getElementById(id);
+        				if (element == null)
+        				{
+            				console.warn('Cannot find element with id \''+id+'\'.');
+            				return;
+        				}
+        				var targetPosition = this.documentVerticalScrollPosition() + this.elementVerticalClientPositionById(id) - padding;
+        				var currentPosition = this.documentVerticalScrollPosition();
+        				// Clamp.
+        				var maximumScrollPosition = this.documentMaximumScrollPosition();
+        				if (targetPosition > maximumScrollPosition) targetPosition = maximumScrollPosition;
+        				// Start animation.
+        				this.scrollVerticalTickToPosition(currentPosition, targetPosition);
+    				}
+				};
+				
+				
+				
+			</script>
+			
+		
+		
+		
+		
+		
+		
+		<footer>
+    		<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+    		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+    		<ul>
+      			<li><a href="#"><i class="fab fa-twitter-square"></i></a></li>
+      			<li><a href="#"><i class="fab fa-facebook-square"></i></a></li>
+      			<li><a href="#"><i class="fab fa-instagram-square"></i></a></li>
+    		</ul>
+  		</footer>
+		
+	</body>
+
+</html>
